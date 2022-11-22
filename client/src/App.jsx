@@ -24,6 +24,7 @@ function App() {
       .then((authorizedUser) => {
         dispatch(setUser(authorizedUser.data));
         localStorage.setItem("token", authorizedUser.data.token);
+        localStorage.setItem("currentUserName", authorizedUser.data.name);
         navigate("/pokemons");
       })
       .catch((err) => {

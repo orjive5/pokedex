@@ -34,7 +34,7 @@ const PokemonList = () => {
       <Navbar />
       {pokemons.map((el) => {
         return (
-          <div key={el.name}>
+          <div key={el.name} onClick={() => navigate(`/pokemons/${el.name}`)}>
             <h1>{el.name}</h1>
             <img
               src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${el.url.slice(
@@ -42,10 +42,6 @@ const PokemonList = () => {
                 -1
               )}.png`}
               alt={el.name}
-              // src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${el.url.slice(
-              //   -3,
-              //   -1
-              // )}.png`}
             />
           </div>
         );
