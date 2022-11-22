@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
+import Navbar from "./Navbar";
 
 const PokemonList = () => {
   const navigate = useNavigate();
@@ -30,6 +31,7 @@ const PokemonList = () => {
   }, []);
   return (
     <div>
+      <Navbar />
       {pokemons.map((el) => {
         return (
           <div key={el.name}>
