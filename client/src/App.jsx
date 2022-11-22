@@ -1,28 +1,18 @@
-import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { nextStep, previousStep, goToStep } from "./redux/slices/stepSlice";
+import FirstStep from "./components/FirstStep";
+import SecondStep from "./components/SecondStep";
+import ThirdStep from "./components/ThirdStep";
 
 function App() {
   const step = useSelector((state) => state.step.value);
-  const dispatch = useDispatch();
   return (
-    <div className="bg-indigo-400">
+    <div className="bg-indigo-400 min-h-screen w-full">
       <h1>Welcome to Pokedex</h1>
-      <div>
-        <h1>Sign Up</h1>
-        <h1>Already have an account? Log in</h1>
-      </div>
-      <div>
-        <h1>STEP: {step}</h1>
-        <button onClick={() => step > 0 && dispatch(previousStep())}>
-          Previous step
-        </button>
-        <button onClick={() => step < 2 && dispatch(nextStep())}>
-          Next step
-        </button>
-        <button onClick={() => dispatch(goToStep(0))}>First step</button>
-        <button onClick={() => dispatch(goToStep(2))}>Last step</button>
-      </div>
+      <h2>Sign Up</h2>
+      {step === 0 && <FirstStep />}
+      {step === 1 && <SecondStep />}
+      {step === 2 && <ThirdStep />}
+      <h2>Already have an account? Log in</h2>
     </div>
   );
 }
