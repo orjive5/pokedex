@@ -29,22 +29,26 @@ const ThirdStep = () => {
           .catch((err) => {
             console.log(err);
           })
-      : setTermsMessage("You need to accept terms of service!");
+      : setTermsMessage("You need to accept Terms of Service!");
   };
   const [terms, setTerms] = useState(false);
   const [termsMessage, setTermsMessage] = useState("");
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="checkbox"
-          id="acceptTerms"
-          checked={terms}
-          onChange={() => setTerms(!terms)}
-        />
-        <label htmlFor="acceptTerms">Accept terms of service</label>
-        <p>{termsMessage}</p>
-        <button>Finish</button>
+    <div className="w-full">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full">
+        <div className="self-center flex gap-2">
+          <input
+            type="checkbox"
+            id="acceptTerms"
+            checked={terms}
+            onChange={() => setTerms(!terms)}
+          />
+          <label htmlFor="acceptTerms">Accept Terms of Service</label>
+        </div>
+        <p className="font-bold text-red-600 text-center">{termsMessage}</p>
+        <button className="bg-red-500 text-gray-100 p-2 rounded-md hover:bg-red-600">
+          Finish
+        </button>
       </form>
     </div>
   );
