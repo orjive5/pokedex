@@ -1,9 +1,9 @@
-import React from "react";
-import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import axios from "axios";
-import { setUser } from "../redux/slices/userSlice";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import axios from 'axios';
+import { setUser } from '../redux/slices/userSlice';
+import { useNavigate } from 'react-router-dom';
 
 const ThirdStep = () => {
   const signup = useSelector((state) => state.signup);
@@ -13,26 +13,26 @@ const ThirdStep = () => {
     e.preventDefault();
     terms
       ? axios
-          .post("http://localhost:8000/auth/register", {
+          .post('http://localhost:8000/auth/register', {
             name: signup.name,
             surname: signup.surname,
             username: signup.username,
             email: signup.email,
-            password: signup.password,
+            password: signup.password
           })
           .then((authorizedUser) => {
             dispatch(setUser(authorizedUser.data));
-            localStorage.setItem("token", authorizedUser.data.token);
-            localStorage.setItem("currentUserName", authorizedUser.data.name);
-            navigate("/pokemons");
+            localStorage.setItem('token', authorizedUser.data.token);
+            localStorage.setItem('currentUserName', authorizedUser.data.name);
+            navigate('/pokemons');
           })
           .catch((err) => {
             console.log(err);
           })
-      : setTermsMessage("You need to accept Terms of Service!");
+      : setTermsMessage('You need to accept Terms of Service!');
   };
   const [terms, setTerms] = useState(false);
-  const [termsMessage, setTermsMessage] = useState("");
+  const [termsMessage, setTermsMessage] = useState('');
   return (
     <div className="w-full">
       <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full">
@@ -46,9 +46,7 @@ const ThirdStep = () => {
           <label htmlFor="acceptTerms">Accept Terms of Service</label>
         </div>
         <p className="font-bold text-red-600 text-center">{termsMessage}</p>
-        <button className="bg-red-500 text-gray-100 p-2 rounded-md hover:bg-red-600">
-          Finish
-        </button>
+        <button className="bg-red-500 text-gray-100 p-2 rounded-md hover:bg-red-600">Finish</button>
       </form>
     </div>
   );

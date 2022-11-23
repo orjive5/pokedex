@@ -1,20 +1,20 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  pokemon: "",
+  pokemon: ''
 };
 
 export const pokemonSlice = createSlice({
-  name: "pokemon",
+  name: 'pokemon',
   initialState,
   reducers: {
     setPokemon: (state, action) => {
       state.pokemon = action.payload;
     },
     removePokemon: (state) => {
-      state.pokemon = "";
-    },
-  },
+      state.pokemon = '';
+    }
+  }
 });
 
 export const { setPokemon, removePokemon } = pokemonSlice.actions;

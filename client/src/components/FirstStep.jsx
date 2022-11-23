@@ -1,12 +1,7 @@
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import {
-  setName,
-  setSurname,
-  setEmail,
-  setUsername,
-} from "../redux/slices/signupSlice";
-import { nextStep } from "../redux/slices/stepSlice";
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setName, setSurname, setEmail, setUsername } from '../redux/slices/signupSlice';
+import { nextStep } from '../redux/slices/stepSlice';
 
 const FirstStep = () => {
   const signup = useSelector((state) => state.signup);
@@ -50,9 +45,7 @@ const FirstStep = () => {
           onChange={(e) => dispatch(setUsername(e.target.value))}
           className="p-2"
         />
-        <button className="bg-red-500 text-gray-100 p-2 rounded-md hover:bg-red-600">
-          Next
-        </button>
+        <button className="bg-red-500 text-gray-100 p-2 rounded-md hover:bg-red-600">Next</button>
       </form>
     </div>
   );

@@ -1,7 +1,7 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import App from "./App";
-import PokemonList from "./components/PokemonList";
-import Pokemon from "./components/Pokemon";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import App from './App';
+import PokemonList from './components/PokemonList';
+import Pokemon from './components/Pokemon';
 
 const RouteSwitch = () => {
   return (

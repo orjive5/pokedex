@@ -1,12 +1,12 @@
-import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import FirstStep from "./components/FirstStep";
-import SecondStep from "./components/SecondStep";
-import ThirdStep from "./components/ThirdStep";
-import { setUser } from "./redux/slices/userSlice";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import WelcomeToPokedex from "./assets/welcome.png";
+import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import FirstStep from './components/FirstStep';
+import SecondStep from './components/SecondStep';
+import ThirdStep from './components/ThirdStep';
+import { setUser } from './redux/slices/userSlice';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import WelcomeToPokedex from './assets/welcome.png';
 
 function App() {
   const dispatch = useDispatch();
@@ -14,21 +14,21 @@ function App() {
   const step = useSelector((state) => state.step.value);
 
   const [loginForm, setLoginForm] = useState(false);
-  const [loginEmail, setLoginEmail] = useState("");
-  const [loginPassword, setLoginPassword] = useState("");
+  const [loginEmail, setLoginEmail] = useState('');
+  const [loginPassword, setLoginPassword] = useState('');
 
   const handleLogin = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:8000/auth/login", {
+      .post('http://localhost:8000/auth/login', {
         email: loginEmail,
-        password: loginPassword,
+        password: loginPassword
       })
       .then((authorizedUser) => {
         dispatch(setUser(authorizedUser.data));
-        localStorage.setItem("token", authorizedUser.data.token);
-        localStorage.setItem("currentUserName", authorizedUser.data.name);
-        navigate("/pokemons");
+        localStorage.setItem('token', authorizedUser.data.token);
+        localStorage.setItem('currentUserName', authorizedUser.data.name);
+        navigate('/pokemons');
       })
       .catch((err) => {
         console.log(err);
@@ -37,20 +37,20 @@ function App() {
 
   //Check if user is logged in
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem('token');
     axios
-      .get("http://localhost:8000/auth/me", {
+      .get('http://localhost:8000/auth/me', {
         headers: {
-          Authorization: token,
-        },
+          Authorization: token
+        }
       })
       .then((res) => {
         console.log(res);
-        navigate("/pokemons");
+        navigate('/pokemons');
       })
       .catch((err) => {
         console.log(err);
-        navigate("/");
+        navigate('/');
       });
   }, []);
 
@@ -86,11 +86,10 @@ function App() {
               Log in
             </button>
           </form>
-          <h2 className="font-semibold text-lg">Don't have an account yet?</h2>
+          <h2 className="font-semibold text-lg">Don&apos;t have an account yet?</h2>
           <button
             className="bg-red-500 text-gray-100 p-2 w-[200px] rounded-md hover:bg-red-600"
-            onClick={() => setLoginForm(false)}
-          >
+            onClick={() => setLoginForm(false)}>
             Sign up
           </button>
         </div>
@@ -103,8 +102,7 @@ function App() {
           <h2 className="font-semibold text-lg">Already have an account?</h2>
           <button
             className="bg-red-500 text-gray-100 p-2 w-[200px] rounded-md hover:bg-red-600"
-            onClick={() => setLoginForm(true)}
-          >
+            onClick={() => setLoginForm(true)}>
             Log in
           </button>
         </div>

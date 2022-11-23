@@ -1,11 +1,11 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  value: 0,
+  value: 0
 };
 
 export const stepSlice = createSlice({
-  name: "step",
+  name: 'step',
   initialState,
   reducers: {
     nextStep: (state) => {
@@ -16,8 +16,8 @@ export const stepSlice = createSlice({
     },
     goToStep: (state, action) => {
       state.value = action.payload;
-    },
-  },
+    }
+  }
 });
 
 export const { nextStep, previousStep, goToStep } = stepSlice.actions;
