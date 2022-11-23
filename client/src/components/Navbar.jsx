@@ -12,7 +12,7 @@ const Navbar = () => {
     window.location.reload(false);
   };
   return (
-    <div className="flex w-full justify-between items-center px-10 py-5 bg-gray-200 sticky top-0">
+    <div className="flex flex-col gap-2 sm:flex-row w-full justify-between items-center p-3 sm:px-10 sm:py-5 bg-gray-200 sticky top-0">
       <h2 className="font-semibold text-lg">
         Hi, {localStorage.getItem("currentUserName")}
       </h2>

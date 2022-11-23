@@ -63,7 +63,7 @@ function App() {
         <div className="w-[60px] h-[60px] bg-white rounded-full absolute border-8 border-gray-800"></div>
       </div>
       {loginForm ? (
-        <div className="w-[500px] bg-gray-200 mt-20 rounded-lg p-5 flex flex-col items-center gap-5">
+        <div className="w-full sm:w-[500px] bg-gray-200 mt-20 sm:rounded-lg p-5 flex flex-col items-center gap-5">
           <h2 className="font-semibold text-lg">Log in</h2>
           <form onSubmit={handleLogin} className="flex flex-col gap-5 w-full">
             <input
@@ -95,7 +95,7 @@ function App() {
           </button>
         </div>
       ) : (
-        <div className="w-[500px] bg-gray-200 mt-20 rounded-lg p-5 flex flex-col items-center gap-5">
+        <div className="w-full sm:w-[500px] bg-gray-200 mt-20 sm:rounded-lg p-5 flex flex-col items-center gap-5">
           <h2 className="font-semibold text-lg">Sign Up</h2>
           {step === 0 && <FirstStep />}
           {step === 1 && <SecondStep />}

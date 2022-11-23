@@ -10,6 +10,7 @@ import ListedPokemon from "./ListedPokemon";
 const PokemonList = () => {
   const navigate = useNavigate();
   const [pokemons, setPokemons] = useState([]);
+  const [fullList, setFullList] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   //Pagination
@@ -33,6 +34,7 @@ const PokemonList = () => {
         navigate("/");
       });
   }, []);
+
   // Get pokemon info
   useEffect(() => {
     axios
@@ -45,12 +47,23 @@ const PokemonList = () => {
       })
       .catch((er) => console.log(er));
   }, [listOffset]);
+
+  //Get full pokemon list
+  useEffect(() => {
+    axios
+      .get(`https://pokeapi.co/api/v2/pokemon/?limit=1154&offset=0`)
+      .then((list) => {
+        setFullList(list.data.results);
+      })
+      .catch((er) => console.log(er));
+  }, []);
+
   return (
     <div className="flex flex-col items-center">
       <Navbar />
       {findPokemon ? (
-        <div className="grid grid-cols-5 m-10 gap-5 justify-items-center">
-          {pokemons.map((el, index) => {
+        <div className="inline-grid grid-flow-row xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 m-10 gap-5 justify-items-center">
+          {fullList.map((el, index) => {
             let pokeNum = el.url.split("/");
             return (
               el.name.includes(findPokemon) && (
@@ -60,11 +73,11 @@ const PokemonList = () => {
           })}
         </div>
       ) : (
-        <div>
-          <div className="grid grid-cols-5 m-10 gap-5 justify-items-center">
+        <div className="flex flex-col justify-center items-center">
+          <div className="inline-grid grid-flow-row xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 m-10 gap-5 justify-items-center">
             {isLoading
               ? Array.from({ length: 50 }, (_, i) => i + 1).map((el) => {
-                  return <Skeleton />;
+                  return <Skeleton key={el} />;
                 })
               : pokemons.map((el, index) => {
                   let pokeNum = el.url.split("/");
@@ -73,7 +86,7 @@ const PokemonList = () => {
                   );
                 })}
           </div>
-          <ul className="flex gap-5 mb-10">
+          <ul className="flex flex-wrap gap-5 m-10">
             {Array.from({ length: numberOfPages }, (_, i) => i + 1).map(
               (el) => {
                 const handlePagination = () => {
