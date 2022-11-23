@@ -21,6 +21,7 @@ const Navbar = () => {
         placeholder="Find pokemon..."
         value={findPokemon}
         onChange={(e) => dispatch(setPokemon(e.target.value))}
+        className="p-2 rounded-md"
       />
       <button
         className="bg-red-500 text-gray-100 py-2 px-5 rounded-md hover:bg-red-600"

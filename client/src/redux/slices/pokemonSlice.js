@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  pokemon: null,
+  pokemon: "",
 };
 
 export const pokemonSlice = createSlice({
@@ -12,7 +12,7 @@ export const pokemonSlice = createSlice({
       state.pokemon = action.payload;
     },
     removePokemon: (state) => {
-      state.pokemon = null;
+      state.pokemon = "";
     },
   },
 });
