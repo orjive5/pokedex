@@ -1,11 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 
-type ListedPokemonProps = {
+interface ListedPokemonProps {
   el: {
     name: string;
   };
   pokeNum: string[];
-};
+}
 
 const listedPokemon = ({ el, pokeNum }: ListedPokemonProps) => {
   const navigate = useNavigate();
@@ -13,7 +13,8 @@ const listedPokemon = ({ el, pokeNum }: ListedPokemonProps) => {
     <div
       className="flex flex-col items-center justify-center gap-5 w-[200px] h-[250px] bg-gray-100 rounded-xl hover:cursor-pointer hover:bg-gray-200 shadow-md hover:shadow-lg"
       key={el.name}
-      onClick={() => navigate(`/pokemons/${el.name}`)}>
+      onClick={() => navigate(`/pokemons/${el.name}`)}
+    >
       <img
         src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
           pokeNum[pokeNum.length - 1] ? pokeNum[pokeNum.length - 1] : pokeNum[pokeNum.length - 2]

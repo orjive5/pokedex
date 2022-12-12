@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import Navbar from './Navbar';
 
-type PokemonInfo = {
+interface PokemonInfo {
   abilities: [];
   sprites: {
     other: {
@@ -20,24 +20,24 @@ type PokemonInfo = {
   stats: [];
   types: [];
   name: string;
-};
+}
 
-type PokemonStats = {
+interface PokemonStats {
   stat: {
     name: string;
   };
   base_stat: string;
-};
+}
 
-type PokemonTypes = {
+interface PokemonTypes {
   type: { name: string };
-};
+}
 
-type PokemonAbilities = {
+interface PokemonAbilities {
   ability: { name: string };
-};
+}
 
-const Pokemon = (): JSX.Element => {
+const Pokemon = () => {
   const { pokemon_name } = useParams();
   const [pokemonInfo, setPokemonInfo] = useState<null | PokemonInfo>(null);
   const navigate = useNavigate();
@@ -47,11 +47,10 @@ const Pokemon = (): JSX.Element => {
       .get(`https://pokeapi.co/api/v2/pokemon/${pokemon_name}`)
       .then((list) => {
         setPokemonInfo(list.data);
-        console.log(list.data);
       })
       .catch((er) => console.log(er));
     //Check if user is logged in
-    const token = localStorage.getItem('token');
+    const token: string | null = localStorage.getItem('token');
     axios
       .get('http://localhost:8000/auth/me', {
         headers: {
@@ -72,7 +71,7 @@ const Pokemon = (): JSX.Element => {
           <img
             alt={pokemon_name}
             src={
-              pokemonInfo.sprites?.other.home.front_default
+              pokemonInfo.sprites.other.home.front_default
                 ? pokemonInfo.sprites.other.home.front_default
                 : pokemonInfo.sprites.front_default
                 ? pokemonInfo.sprites.front_default
@@ -84,7 +83,6 @@ const Pokemon = (): JSX.Element => {
           <div className="text-center">
             <h1 className="text-lg sm:text-xl font-semibold">Abilities:</h1>
             <ul>
-              {/* TODO */}
               {pokemonInfo.abilities.map((el: PokemonAbilities) => {
                 return (
                   <li key={el.ability.name}>
@@ -122,7 +120,8 @@ const Pokemon = (): JSX.Element => {
       )}
       <Link
         className="text-center m-10 bg-red-500 text-gray-100 p-2 w-[200px] rounded-md hover:bg-red-600"
-        to="/pokemons">
+        to="/pokemons"
+      >
         Back
       </Link>
     </div>

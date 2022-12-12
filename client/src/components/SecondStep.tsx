@@ -13,8 +13,8 @@ const SecondStep = () => {
       ? dispatch(nextStep())
       : setPasswordMatch(`Password didn't match!`);
   };
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [passwordMatch, setPasswordMatch] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
+  const [passwordMatch, setPasswordMatch] = useState<string>('');
   return (
     <div className="w-full">
       <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full">

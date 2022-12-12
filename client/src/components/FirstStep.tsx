@@ -6,11 +6,14 @@ import { nextStep } from '../redux/slices/stepSlice';
 const FirstStep = () => {
   const signup = useAppSelector((state) => state.signup);
   const dispatch = useAppDispatch();
+
   type SubmitEvent = React.SyntheticEvent<HTMLFormElement>;
-  const handleSubmit = (e: SubmitEvent) => {
+
+  const handleSubmit = (e: SubmitEvent): void => {
     e.preventDefault();
     dispatch(nextStep());
   };
+
   return (
     <div className="w-full">
       <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full">

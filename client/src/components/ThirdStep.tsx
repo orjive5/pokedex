@@ -32,8 +32,8 @@ const ThirdStep = () => {
           })
       : setTermsMessage('You need to accept Terms of Service!');
   };
-  const [terms, setTerms] = useState(false);
-  const [termsMessage, setTermsMessage] = useState('');
+  const [terms, setTerms] = useState<boolean>(false);
+  const [termsMessage, setTermsMessage] = useState<string>('');
   return (
     <div className="w-full">
       <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full">

@@ -1,4 +1,4 @@
-import { useState, useEffect, SyntheticEvent } from 'react';
+import { useState, useEffect, ReactElement } from 'react';
 import { useAppSelector, useAppDispatch } from './hooks';
 import FirstStep from './components/FirstStep';
 import SecondStep from './components/SecondStep';
@@ -13,7 +13,7 @@ type SubmitEvent = React.SyntheticEvent<HTMLFormElement>;
 function App() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const step = useAppSelector((state) => state.step.value);
+  const step: number = useAppSelector((state) => state.step.value);
 
   const [loginForm, setLoginForm] = useState<boolean>(false);
   const [loginEmail, setLoginEmail] = useState<string>('');
@@ -38,7 +38,7 @@ function App() {
 
   //Check if user is logged in
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token: string | null = localStorage.getItem('token');
     axios
       .get('http://localhost:8000/auth/me', {
         headers: {
@@ -90,7 +90,8 @@ function App() {
           <h2 className="font-semibold text-lg">Don&apos;t have an account yet?</h2>
           <button
             className="bg-red-500 text-gray-100 p-2 w-[200px] rounded-md hover:bg-red-600"
-            onClick={() => setLoginForm(false)}>
+            onClick={() => setLoginForm(false)}
+          >
             Sign up
           </button>
         </div>
@@ -103,7 +104,8 @@ function App() {
           <h2 className="font-semibold text-lg">Already have an account?</h2>
           <button
             className="bg-red-500 text-gray-100 p-2 w-[200px] rounded-md hover:bg-red-600"
-            onClick={() => setLoginForm(true)}>
+            onClick={() => setLoginForm(true)}
+          >
             Log in
           </button>
         </div>

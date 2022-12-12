@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-type InitialState = {
+interface InitialState {
   pokemon: string;
-};
+}
 
 const initialState: InitialState = {
   pokemon: ''

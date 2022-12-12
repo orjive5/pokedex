@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-type InitialState = {
+interface InitialState {
   value: number;
-};
+}
 
 const initialState: InitialState = {
   value: 0

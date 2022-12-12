@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-type InitialState = {
+interface InitialState {
   name: string;
   surname: string;
   email: string;
   username: string;
   password: string;
-};
+}
 
 const initialState: InitialState = {
   name: '',
