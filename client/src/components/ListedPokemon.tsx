@@ -1,7 +1,13 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const listedPokemon = ({ el, pokeNum }) => {
+type ListedPokemonProps = {
+  el: {
+    name: string;
+  };
+  pokeNum: string[];
+};
+
+const listedPokemon = ({ el, pokeNum }: ListedPokemonProps) => {
   const navigate = useNavigate();
   return (
     <div

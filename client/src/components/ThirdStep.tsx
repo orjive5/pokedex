@@ -1,15 +1,15 @@
-import React from 'react';
 import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useAppSelector, useAppDispatch } from '../hooks';
 import axios from 'axios';
 import { setUser } from '../redux/slices/userSlice';
 import { useNavigate } from 'react-router-dom';
 
 const ThirdStep = () => {
-  const signup = useSelector((state) => state.signup);
-  const dispatch = useDispatch();
+  const signup = useAppSelector((state) => state.signup);
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const handleSubmit = (e) => {
+  type SubmitEvent = React.SyntheticEvent<HTMLFormElement>;
+  const handleSubmit = (e: SubmitEvent) => {
     e.preventDefault();
     terms
       ? axios

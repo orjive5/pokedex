@@ -1,6 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-const initialState = {
+type InitialState = {
+  value: number;
+};
+
+const initialState: InitialState = {
   value: 0
 };
 
@@ -14,7 +18,7 @@ export const stepSlice = createSlice({
     previousStep: (state) => {
       state.value -= 1;
     },
-    goToStep: (state, action) => {
+    goToStep: (state, action: PayloadAction<number>) => {
       state.value = action.payload;
     }
   }

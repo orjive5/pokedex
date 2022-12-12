@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useState } from 'react';
+import { useAppSelector, useAppDispatch } from '../hooks';
 import { setPassword } from '../redux/slices/signupSlice';
 import { nextStep } from '../redux/slices/stepSlice';
 
 const SecondStep = () => {
-  const signup = useSelector((state) => state.signup);
-  const dispatch = useDispatch();
-  const handleSubmit = (e) => {
+  const signup = useAppSelector((state) => state.signup);
+  const dispatch = useAppDispatch();
+  type SubmitEvent = React.SyntheticEvent<HTMLFormElement>;
+  const handleSubmit = (e: SubmitEvent) => {
     e.preventDefault();
     confirmPassword === signup.password
       ? dispatch(nextStep())

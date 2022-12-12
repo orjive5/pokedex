@@ -1,15 +1,14 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../hooks';
 import { removeUser } from '../redux/slices/userSlice';
 import { setPokemon } from '../redux/slices/pokemonSlice';
 
 const Navbar = () => {
-  const dispatch = useDispatch();
-  const findPokemon = useSelector((state) => state.pokemon.pokemon);
+  const dispatch = useAppDispatch();
+  const findPokemon = useAppSelector((state) => state.pokemon.pokemon);
   const logOut = () => {
     localStorage.clear();
     dispatch(removeUser());
-    window.location.reload(false);
+    window.location.reload();
   };
   return (
     <div className="flex flex-col gap-2 sm:flex-row w-full justify-between items-center p-3 sm:px-10 sm:py-5 bg-gray-200 sticky top-0">

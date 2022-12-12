@@ -1,12 +1,13 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useAppSelector, useAppDispatch } from '../hooks';
 import { setName, setSurname, setEmail, setUsername } from '../redux/slices/signupSlice';
 import { nextStep } from '../redux/slices/stepSlice';
 
 const FirstStep = () => {
-  const signup = useSelector((state) => state.signup);
-  const dispatch = useDispatch();
-  const handleSubmit = (e) => {
+  const signup = useAppSelector((state) => state.signup);
+  const dispatch = useAppDispatch();
+  type SubmitEvent = React.SyntheticEvent<HTMLFormElement>;
+  const handleSubmit = (e: SubmitEvent) => {
     e.preventDefault();
     dispatch(nextStep());
   };

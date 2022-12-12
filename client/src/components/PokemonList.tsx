@@ -1,16 +1,21 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useState } from 'react';
 import Navbar from './Navbar';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../hooks';
 import Skeleton from './Skeleton';
 import ListedPokemon from './ListedPokemon';
 
-const PokemonList = () => {
+type FullListType = {
+  [key: string]: any;
+  url: string[];
+};
+
+const PokemonList = (): JSX.Element => {
   const navigate = useNavigate();
   const [pokemons, setPokemons] = useState([]);
-  const [fullList, setFullList] = useState(null);
+  const [fullList, setFullList] = useState<null | FullListType>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   //Pagination
@@ -18,7 +23,7 @@ const PokemonList = () => {
   const [pokemonsPerPage] = useState(50);
   const [listOffset, setListOffset] = useState(0);
   const [numberOfPages, setNumberOfPages] = useState(1);
-  const findPokemon = useSelector((state) => state.pokemon.pokemon);
+  const findPokemon = useAppSelector((state) => state.pokemon.pokemon);
 
   // Check if user is logged
   useEffect(() => {
@@ -63,14 +68,15 @@ const PokemonList = () => {
       <Navbar />
       {findPokemon ? (
         <div className="inline-grid grid-flow-row xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 m-10 gap-5 justify-items-center">
-          {fullList.map((el, index) => {
-            let pokeNum = el.url.split('/');
-            return (
-              el.name.includes(findPokemon) && (
-                <ListedPokemon key={index} el={el} pokeNum={pokeNum} />
-              )
-            );
-          })}
+          {fullList &&
+            fullList.map((el: { url: string; name: string }, index: number) => {
+              let pokeNum = el.url.split('/');
+              return (
+                el.name.includes(findPokemon) && (
+                  <ListedPokemon key={index} el={el} pokeNum={pokeNum} />
+                )
+              );
+            })}
         </div>
       ) : (
         <div className="flex flex-col justify-center items-center">
@@ -79,10 +85,18 @@ const PokemonList = () => {
               ? Array.from({ length: 50 }, (_, i) => i + 1).map((el) => {
                   return <Skeleton key={el} />;
                 })
-              : pokemons.map((el, index) => {
-                  let pokeNum = el.url.split('/');
-                  return <ListedPokemon key={index} el={el} pokeNum={pokeNum} />;
-                })}
+              : pokemons.map(
+                  (
+                    el: {
+                      url: string;
+                      name: string;
+                    },
+                    index: number
+                  ) => {
+                    let pokeNum = el.url.split('/');
+                    return <ListedPokemon key={index} el={el} pokeNum={pokeNum} />;
+                  }
+                )}
           </div>
           <ul className="flex flex-wrap gap-5 m-10">
             {Array.from({ length: numberOfPages }, (_, i) => i + 1).map((el) => {

@@ -1,13 +1,21 @@
-import React from 'react';
 import { useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useState } from 'react';
 import Navbar from './Navbar';
 
-const Pokemon = () => {
+type PokemonInfo = {
+  [key: string]: any;
+  abilities: string[];
+};
+
+type Abilities = {
+  [key: string]: any;
+};
+
+const Pokemon = (): JSX.Element => {
   const { pokemon_name } = useParams();
-  const [pokemonInfo, setPokemonInfo] = useState(null);
+  const [pokemonInfo, setPokemonInfo] = useState<null | PokemonInfo>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -40,7 +48,7 @@ const Pokemon = () => {
           <img
             alt={pokemon_name}
             src={
-              pokemonInfo.sprites.other.home.front_default
+              pokemonInfo.sprites?.other.home.front_default
                 ? pokemonInfo.sprites.other.home.front_default
                 : pokemonInfo.sprites.front_default
                 ? pokemonInfo.sprites.front_default
@@ -52,7 +60,8 @@ const Pokemon = () => {
           <div className="text-center">
             <h1 className="text-lg sm:text-xl font-semibold">Abilities:</h1>
             <ul>
-              {pokemonInfo.abilities.map((el) => {
+              {/* TODO */}
+              {pokemonInfo.abilities.map((el: any) => {
                 return (
                   <li key={el.ability.name}>
                     {el.ability.name.slice(0, 1).toUpperCase() + el.ability.name.slice(1)}
@@ -64,7 +73,8 @@ const Pokemon = () => {
           <div className="text-center">
             <h1 className="text-lg sm:text-xl font-semibold">Stats:</h1>
             <ul>
-              {pokemonInfo.stats.map((el) => {
+              {/* TODO */}
+              {pokemonInfo.stats.map((el: any) => {
                 return (
                   <li key={el.stat.name}>
                     {el.stat.name.slice(0, 1).toUpperCase() + el.stat.name.slice(1)}: {el.base_stat}
@@ -76,7 +86,8 @@ const Pokemon = () => {
           <div className="text-center">
             <h1 className="text-lg sm:text-xl font-semibold">Types:</h1>
             <ul>
-              {pokemonInfo.types.map((el) => {
+              {/* TODO */}
+              {pokemonInfo.types.map((el: any) => {
                 return (
                   <li key={el.type.name}>
                     {el.type.name.slice(0, 1).toUpperCase() + el.type.name.slice(1)}

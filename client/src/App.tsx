@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useAppSelector, useAppDispatch } from './hooks';
 import FirstStep from './components/FirstStep';
 import SecondStep from './components/SecondStep';
 import ThirdStep from './components/ThirdStep';
@@ -9,15 +9,15 @@ import axios from 'axios';
 import WelcomeToPokedex from './assets/welcome.png';
 
 function App() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const step = useSelector((state) => state.step.value);
+  const step = useAppSelector((state) => state.step.value);
 
   const [loginForm, setLoginForm] = useState(false);
   const [loginEmail, setLoginEmail] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
-
-  const handleLogin = (e) => {
+  type SubmitEvent = React.SyntheticEvent<HTMLFormElement>;
+  const handleLogin = (e: SubmitEvent) => {
     e.preventDefault();
     axios
       .post('http://localhost:8000/auth/login', {

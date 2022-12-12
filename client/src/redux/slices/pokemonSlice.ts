@@ -1,6 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-const initialState = {
+type InitialState = {
+  pokemon: string;
+};
+
+const initialState: InitialState = {
   pokemon: ''
 };
 
@@ -8,7 +12,7 @@ export const pokemonSlice = createSlice({
   name: 'pokemon',
   initialState,
   reducers: {
-    setPokemon: (state, action) => {
+    setPokemon: (state, action: PayloadAction<string>) => {
       state.pokemon = action.payload;
     },
     removePokemon: (state) => {
