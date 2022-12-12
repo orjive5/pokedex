@@ -5,12 +5,36 @@ import { useState } from 'react';
 import Navbar from './Navbar';
 
 type PokemonInfo = {
-  [key: string]: any;
-  abilities: string[];
+  abilities: [];
+  sprites: {
+    other: {
+      home: {
+        front_default: string;
+      };
+      'official-artwork': {
+        front_default: string;
+      };
+    };
+    front_default: string;
+  };
+  stats: [];
+  types: [];
+  name: string;
 };
 
-type Abilities = {
-  [key: string]: any;
+type PokemonStats = {
+  stat: {
+    name: string;
+  };
+  base_stat: string;
+};
+
+type PokemonTypes = {
+  type: { name: string };
+};
+
+type PokemonAbilities = {
+  ability: { name: string };
 };
 
 const Pokemon = (): JSX.Element => {
@@ -61,7 +85,7 @@ const Pokemon = (): JSX.Element => {
             <h1 className="text-lg sm:text-xl font-semibold">Abilities:</h1>
             <ul>
               {/* TODO */}
-              {pokemonInfo.abilities.map((el: any) => {
+              {pokemonInfo.abilities.map((el: PokemonAbilities) => {
                 return (
                   <li key={el.ability.name}>
                     {el.ability.name.slice(0, 1).toUpperCase() + el.ability.name.slice(1)}
@@ -73,8 +97,7 @@ const Pokemon = (): JSX.Element => {
           <div className="text-center">
             <h1 className="text-lg sm:text-xl font-semibold">Stats:</h1>
             <ul>
-              {/* TODO */}
-              {pokemonInfo.stats.map((el: any) => {
+              {pokemonInfo.stats.map((el: PokemonStats) => {
                 return (
                   <li key={el.stat.name}>
                     {el.stat.name.slice(0, 1).toUpperCase() + el.stat.name.slice(1)}: {el.base_stat}
@@ -86,8 +109,7 @@ const Pokemon = (): JSX.Element => {
           <div className="text-center">
             <h1 className="text-lg sm:text-xl font-semibold">Types:</h1>
             <ul>
-              {/* TODO */}
-              {pokemonInfo.types.map((el: any) => {
+              {pokemonInfo.types.map((el: PokemonTypes) => {
                 return (
                   <li key={el.type.name}>
                     {el.type.name.slice(0, 1).toUpperCase() + el.type.name.slice(1)}

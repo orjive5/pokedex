@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, SyntheticEvent } from 'react';
 import { useAppSelector, useAppDispatch } from './hooks';
 import FirstStep from './components/FirstStep';
 import SecondStep from './components/SecondStep';
@@ -8,15 +8,16 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import WelcomeToPokedex from './assets/welcome.png';
 
+type SubmitEvent = React.SyntheticEvent<HTMLFormElement>;
+
 function App() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const step = useAppSelector((state) => state.step.value);
 
-  const [loginForm, setLoginForm] = useState(false);
-  const [loginEmail, setLoginEmail] = useState('');
-  const [loginPassword, setLoginPassword] = useState('');
-  type SubmitEvent = React.SyntheticEvent<HTMLFormElement>;
+  const [loginForm, setLoginForm] = useState<boolean>(false);
+  const [loginEmail, setLoginEmail] = useState<string>('');
+  const [loginPassword, setLoginPassword] = useState<string>('');
   const handleLogin = (e: SubmitEvent) => {
     e.preventDefault();
     axios

@@ -4,11 +4,12 @@ import axios from 'axios';
 import { setUser } from '../redux/slices/userSlice';
 import { useNavigate } from 'react-router-dom';
 
+type SubmitEvent = React.SyntheticEvent<HTMLFormElement>;
+
 const ThirdStep = () => {
   const signup = useAppSelector((state) => state.signup);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  type SubmitEvent = React.SyntheticEvent<HTMLFormElement>;
   const handleSubmit = (e: SubmitEvent) => {
     e.preventDefault();
     terms

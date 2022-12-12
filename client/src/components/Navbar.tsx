@@ -5,7 +5,7 @@ import { setPokemon } from '../redux/slices/pokemonSlice';
 const Navbar = () => {
   const dispatch = useAppDispatch();
   const findPokemon = useAppSelector((state) => state.pokemon.pokemon);
-  const logOut = () => {
+  const logOut = (): void => {
     localStorage.clear();
     dispatch(removeUser());
     window.location.reload();
